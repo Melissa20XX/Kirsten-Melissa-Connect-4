@@ -92,8 +92,4 @@ Notes:
     Since the total tally in this direction is 3,
     our victory is confirmed 
 
-    
-    
-
-
 */
