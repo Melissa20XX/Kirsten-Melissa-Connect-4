@@ -1,4 +1,4 @@
-/*
+﻿/*
 
     ####################################
     #                                  #
@@ -131,7 +131,7 @@ namespace ConnectFour
 
                 Console.WriteLine("Would you like to Play again? (y/n)");
                 PlayAgain = Console.ReadLine();
-                PlayAgain = PlayAgain.ToUpper;
+                PlayAgain = PlayAgain.ToUpper();
 
             } while (PlayAgain == "Y" || PlayAgain == "YES");
 
