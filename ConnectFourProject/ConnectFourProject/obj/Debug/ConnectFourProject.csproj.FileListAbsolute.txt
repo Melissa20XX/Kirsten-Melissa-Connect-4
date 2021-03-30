@@ -1,0 +1,7 @@
+C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\bin\Debug\ConnectFourProject.exe.config
+C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\bin\Debug\ConnectFourProject.exe
+C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\bin\Debug\ConnectFourProject.pdb
+C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.csprojAssemblyReference.cache
+C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.csproj.CoreCompileInputs.cache
+C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.exe
+C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.pdb
