@@ -108,11 +108,35 @@ namespace ConnectFour
     {
         static void Main(string[] args)
         {
+            do 
+            {
+                string PlayAgain;
+
+                Console.WriteLine("Input 1 or 2 to Play: \n1: Player VS. Player \n2: Player VS. Computer");
+                int MenuInput = Int32.Parse(Console.ReadLine());
+
+                if (MenuInput == 1)
+                {
+                    Console.WriteLine("num 1");
+                }
+                else if (MenuInput == 2)
+                {
+                    Console.WriteLine("num 2");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input...Please enter 1 or 2");
+                }
+
+                Console.WriteLine("Would you like to Play again? (y/n)");
+                PlayAgain = Console.ReadLine();
+                PlayAgain = PlayAgain.ToUpper;
+
+            } while (PlayAgain == "Y" || PlayAgain == "YES")
 
 
 
-
-
+            Console.Read();
         }
     }
 }
