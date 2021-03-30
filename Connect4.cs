@@ -108,9 +108,10 @@ namespace ConnectFour
     {
         static void Main(string[] args)
         {
-            do 
+            string PlayAgain;
+
+            do
             {
-                string PlayAgain;
 
                 Console.WriteLine("Input 1 or 2 to Play: \n1: Player VS. Player \n2: Player VS. Computer");
                 int MenuInput = Int32.Parse(Console.ReadLine());
@@ -132,7 +133,7 @@ namespace ConnectFour
                 PlayAgain = Console.ReadLine();
                 PlayAgain = PlayAgain.ToUpper;
 
-            } while (PlayAgain == "Y" || PlayAgain == "YES")
+            } while (PlayAgain == "Y" || PlayAgain == "YES");
 
 
 
