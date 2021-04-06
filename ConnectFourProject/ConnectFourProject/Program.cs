@@ -102,18 +102,25 @@ using System.Threading.Tasks;
 
 namespace ConnectFour
 {
-    public class CheckForWin
+    public class Controller
     {
 
     }
-    public class PlayerVsPlayer : CheckForWin
+    public abstract class Player
+    {
+        public string Name { get; set; }
+
+
+    }
+    public class Human : Player
     {
 
     }
-    public class PlayerVsComputer : CheckForWin
+    public class Computer : Player
     {
 
     }
+
 
     class Program
     {
