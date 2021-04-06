@@ -108,12 +108,15 @@ namespace ConnectFour
     }
     public abstract class Player
     {
-        public string Name { get; set; }
-
 
     }
     public class Human : Player
     {
+        public string Name { get; set; }
+        public Human(string name)
+        {
+            Name = name;
+        }
 
     }
     public class Computer : Player
@@ -136,11 +139,22 @@ namespace ConnectFour
 
                 if (MenuInput == 1)
                 {
-                    Console.WriteLine("num 1");
+                    Console.WriteLine("Please enter player one's name: ");
+                    string PlayerOne = Console.ReadLine();
+                    Console.WriteLine(PlayerOne + "You will be playing as 'X' \nPlease enter player two's name: ");
+                    string PlayerTwo = Console.ReadLine();
+                    Console.WriteLine(PlayerTwo + "You will be playing as 'O'");
+                    Human NumOne = new Human(PlayerOne);
+                    Human NumTwo = new Human(PlayerTwo);
+
                 }
                 else if (MenuInput == 2)
                 {
-                    Console.WriteLine("num 2");
+                    Console.WriteLine("Please enter your name: ");
+                    string PlayerName = Console.ReadLine();
+                    Console.WriteLine(PlayerName + "You will be playing as 'X'");
+                    Human Player = new Human(PlayerName);
+
                 }
                 else
                 {
