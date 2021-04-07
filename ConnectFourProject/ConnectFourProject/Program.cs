@@ -102,27 +102,85 @@ using System.Threading.Tasks;
 
 namespace ConnectFour
 {
-    public class Controller
+    public static class Controller
     {
+        public static string[] GameArray = { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  " };
+        public static bool CheckWin()
+        {
+            //static so it can be called within the other classes and without creating an object
+            //return true for win and false for not a win
+            return false;
+        }
+        public static bool PrintGameBoard(char piece, int turn) //static method so that the changes apply to all objects
+        {
+            //7 collumns by 6 rows
+            int k = 0;
+            for (int i = 0; i < 7; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write(GameArray[k]);
+                    k++;
+                }
+                Console.WriteLine();
+            }
 
+            //integer parameter input so we can place a game piece in the correct collumn
+            //we need to check if a collumn is full and if it is full return try again
+            //should we clear the console before printing the game board with turn changes? - Console.Clear()
+            //maybe here, but maybe not
+
+            return true; //return true if the game piece is able to be placed and false if the collumn is full
+        }
     }
     public abstract class Player
     {
+        public char GamePiece { get; set; }
+
+        public Player(char piece)
+        {
+            GamePiece = piece;
+        }
+
+        public abstract void TakeATurn();
 
     }
     public class Human : Player
     {
         public string Name { get; set; }
-        public Human(string name)
+        public Human(char piece, string name) :base(piece)
         {
             Name = name;
         }
+        public override void TakeATurn()
+        {
+            bool TurnCompleted;
+            do //let player take a turn untill the pick a collumn that is not full
+            {
+                Console.WriteLine(Name + " please enter the number of the collumn you wish to place your game piece in: ");
+                int turn = Int32.Parse(Console.ReadLine());
+                if (Controller.PrintGameBoard(GamePiece, turn)) // pass the collumn number and the game piece to the print game board to check if it is full
+                {
+                    TurnCompleted = true; 
+                }
+                else
+                {
+                    Console.WriteLine("Collumn is full, please place your game piece somewhere else!");
+                    TurnCompleted = false; // if the collumn was full, the player's turn is not over and they should pick another collumn number
+                }
 
-    }
-    public class Computer : Player
-    {
+            } while (TurnCompleted == false); 
+        }
 
-    }
+}
+    //public class Computer : Player
+    //{
+    //    public override bool TakeATurn()
+    //    {
+    //        //AI
+    //        return false;
+    //    }
+    //}
 
 
     class Program
@@ -144,16 +202,32 @@ namespace ConnectFour
                     Console.WriteLine(PlayerOne + "You will be playing as 'X' \nPlease enter player two's name: ");
                     string PlayerTwo = Console.ReadLine();
                     Console.WriteLine(PlayerTwo + "You will be playing as 'O'");
-                    Human NumOne = new Human(PlayerOne);
-                    Human NumTwo = new Human(PlayerTwo);
+                    Human NumOne = new Human('X', PlayerOne);
+                    Human NumTwo = new Human('O', PlayerTwo);
+
+                    for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    {
+                        NumOne.TakeATurn();
+                        if (Controller.CheckWin())
+                        {
+                            Console.WriteLine("Congratulations " + NumOne.Name + "! You Win!");
+                            break;
+                        }
+                        NumTwo.TakeATurn();
+                        if (Controller.CheckWin())
+                        {
+                            Console.WriteLine("Congratulations " + NumTwo.Name + "! You Win!");
+                            break;
+                        }
+                    }
 
                 }
                 else if (MenuInput == 2)
                 {
-                    Console.WriteLine("Please enter your name: ");
-                    string PlayerName = Console.ReadLine();
-                    Console.WriteLine(PlayerName + "You will be playing as 'X'");
-                    Human Player = new Human(PlayerName);
+                    //Console.WriteLine("Please enter your name: ");
+                    //string PlayerName = Console.ReadLine();
+                    //Console.WriteLine(PlayerName + "You will be playing as 'X'");
+                    //Human Player = new Human(PlayerName);
 
                 }
                 else
@@ -161,7 +235,7 @@ namespace ConnectFour
                     Console.WriteLine("Invalid Input...Please enter 1 or 2");
                 }
 
-                Console.WriteLine("Would you like to Play again? (y/n)");
+                Console.WriteLine("Would you like to play again? (y/n)");
                 PlayAgain = Console.ReadLine();
                 PlayAgain = PlayAgain.ToUpper();
 
