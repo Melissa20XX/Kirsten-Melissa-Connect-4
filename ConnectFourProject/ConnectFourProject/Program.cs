@@ -104,6 +104,12 @@ namespace ConnectFour
 {
     public static class Controller
     {
+        //Length and Width static variables for easier maintenence of game!! 
+        //If in the future we would like to make the game board a different size, all we would have to change is the array and the length and width numbers
+        public static int Length { get; private set; } = 7;
+
+        public static int Width { get; private set; } = 6;
+
         public static string[,] GameArray = { { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
                                               { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
                                               { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
@@ -120,10 +126,10 @@ namespace ConnectFour
             int counter = 0;
 
             //horizontal checking
-            for (int i = 0; i < 6; i++) //one less than max so when one is added to the index it wont break
+            for (int i = 0; i < Length - 1; i++) //one less than max so when one is added to the index it wont break
             {
                 counter = 0;
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < Width; j++)
                 {
                     if (GameArray[i,j] != "| # |")
                     {
@@ -143,10 +149,10 @@ namespace ConnectFour
                 }
             }
             //vertical checking
-            for (int j = 0; j < 7; j++)
+            for (int j = 0; j < Length; j++)
             {
                 counter = 0;
-                for (int i = 0; i < 5; i++) //one less than max so when one is added to the index it wont break
+                for (int i = 0; i < Width - 1; i++) //one less than max so when one is added to the index it wont break
                 {
                     if (GameArray[i, j] != "| # |")
                     {
@@ -168,9 +174,9 @@ namespace ConnectFour
 
             //diagonal left to right checking
             counter = 0;
-            for (int i = 0; i<6; i++) //one less than max so when one is added to the index it wont break
+            for (int i = 0; i< Length - 1; i++) //one less than max so when one is added to the index it wont break
             {
-                for (int j = i; j<5; j++) //one less than max so when one is added to the index it wont break
+                for (int j = i; j< Width - 1; j++) //one less than max so when one is added to the index it wont break
                 {
                     if (GameArray[i, j] != "| # |")
                     {
@@ -219,14 +225,27 @@ namespace ConnectFour
 
             return false;
         }
+        public static void ResetGameBoard()
+        {
+            Console.WriteLine();
+
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Length; j++)
+                {
+                    GameArray[i, j] = "| # |";
+                }
+            }
+
+        }
         public static void PrintGameBoard() //static method so that the changes apply to all objects
         {
             //7 collumns by 6 rows
             Console.WriteLine();
 
-            for (int i=0; i<7; i++)
+            for (int i=0; i< Width + 1; i++)
             {
-                for(int j=0; j<7; j++)
+                for(int j=0; j< Length; j++)
                 {
                     Console.Write(GameArray[i, j]);
                 }
@@ -235,7 +254,7 @@ namespace ConnectFour
         }
         public static bool CheckTurn(char piece, int turn)
         {
-            for (int i = 5; i >= 0; i--)
+            for (int i = Width - 1; i >= 0; i--)
             {
                 if (GameArray[i , turn - 1] == "| # |")
                 {
@@ -308,7 +327,7 @@ namespace ConnectFour
             do 
             {
                 Random r = new Random();
-                int turn = r.Next(1, 7);
+                int turn = r.Next(1, Controller.Length + 1);
 
                 if (Controller.CheckTurn(GamePiece, turn)) // pass the collumn number and the game piece to the print game board to check if it is full
                 {
@@ -351,7 +370,7 @@ namespace ConnectFour
                     
                     Controller.PrintGameBoard();
 
-                    for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    for (int i = 1; i <= Controller.Length * Controller.Width; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
                     {
                         NumOne.TakeATurn();
                         if (Controller.CheckWin())
@@ -382,7 +401,7 @@ namespace ConnectFour
 
                     Controller.PrintGameBoard();
 
-                    for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    for (int i = 1; i <= Controller.Length * Controller.Width; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
                     {
                         Player.TakeATurn();
                         if (Controller.CheckWin())
@@ -406,6 +425,8 @@ namespace ConnectFour
                 {
                     Console.WriteLine("Invalid Input...Please enter 1 or 2");
                 }
+
+                Controller.ResetGameBoard();
 
                 Console.WriteLine("Would you like to play again? (y/n)");
                 PlayAgain = Console.ReadLine();
