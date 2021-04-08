@@ -104,23 +104,129 @@ namespace ConnectFour
 {
     public static class Controller
     {
-        public static string[] GameArray = { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  " };
+        public static string[,] GameArray = { { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
+                                              { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
+                                              { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
+                                              { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
+                                              { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
+                                              { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
+                                              { "  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  " } };
+        
         public static bool CheckWin()
         {
             //static so it can be called within the other classes and without creating an object
             //return true for win and false for not a win
+
+            int counter = 0;
+
+            //horizontal checking
+            for (int i = 0; i < 6; i++) //one less than max so when one is added to the index it wont break
+            {
+                counter = 0;
+                for (int j = 0; j < 6; j++)
+                {
+                    if (GameArray[i,j] != "| # |")
+                    {
+                        if(GameArray[i,j] == GameArray[i,j + 1])
+                        {
+                            counter++;
+                            if (counter == 3)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            counter = 0;
+                        }
+                    }
+                }
+            }
+            //vertical checking
+            for (int j = 0; j < 7; j++)
+            {
+                counter = 0;
+                for (int i = 0; i < 5; i++) //one less than max so when one is added to the index it wont break
+                {
+                    if (GameArray[i, j] != "| # |")
+                    {
+                        if (GameArray[i, j] == GameArray[i + 1, j])
+                        {
+                            counter++;
+                            if (counter == 3)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            counter = 0;
+                        }
+                    }
+                }
+            }
+
+            //diagonal left to right checking
+            counter = 0;
+            for (int i = 0; i<6; i++) //one less than max so when one is added to the index it wont break
+            {
+                for (int j = i; j<5; j++) //one less than max so when one is added to the index it wont break
+                {
+                    if (GameArray[i, j] != "| # |")
+                    {
+                        if (GameArray[i, j] == GameArray[i + 1, j + 1])
+                        {
+                            counter++;
+                            if (counter == 3)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            counter = 0;
+                        }
+                    }
+                }
+            }
+
+            //diagonal right to left checking                              still have to do this diagonal
+            //counter = 0;
+            //for (int i = 6; i > 0; i--)
+            //{
+            //    for (int j = 7; j > 0; j--)
+            //    {
+            //        if (GameArray[i, j] != "| # |")
+            //        {
+            //            if (GameArray[i, j] == GameArray[i - 1, j - 1])
+            //            {
+            //                counter++;
+            //                if (counter == 3)
+            //                {
+            //                    return true;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                counter = 0;
+            //            }
+            //        }
+            //    }
+            //}
+
+
+
+
             return false;
         }
         public static bool PrintGameBoard(char piece, int turn) //static method so that the changes apply to all objects
         {
             //7 collumns by 6 rows
-            int k = 0;
-            for (int i = 0; i < 7; i++)
+            for (int i=0; i<7; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for(int j=0; j<7; j++)
                 {
-                    Console.Write(GameArray[k]);
-                    k++;
+                    Console.Write(GameArray[i, j]);
                 }
                 Console.WriteLine();
             }
@@ -197,29 +303,35 @@ namespace ConnectFour
 
                 if (MenuInput == 1)
                 {
-                    Console.WriteLine("Please enter player one's name: ");
-                    string PlayerOne = Console.ReadLine();
-                    Console.WriteLine(PlayerOne + "You will be playing as 'X' \nPlease enter player two's name: ");
-                    string PlayerTwo = Console.ReadLine();
-                    Console.WriteLine(PlayerTwo + "You will be playing as 'O'");
-                    Human NumOne = new Human('X', PlayerOne);
-                    Human NumTwo = new Human('O', PlayerTwo);
 
-                    for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    Controller.PrintGameBoard('X', 2);
+                    if(Controller.CheckWin())
                     {
-                        NumOne.TakeATurn();
-                        if (Controller.CheckWin())
-                        {
-                            Console.WriteLine("Congratulations " + NumOne.Name + "! You Win!");
-                            break;
-                        }
-                        NumTwo.TakeATurn();
-                        if (Controller.CheckWin())
-                        {
-                            Console.WriteLine("Congratulations " + NumTwo.Name + "! You Win!");
-                            break;
-                        }
+                        Console.WriteLine("win");
                     }
+                    //Console.WriteLine("Please enter player one's name: ");
+                    //string PlayerOne = Console.ReadLine();
+                    //Console.WriteLine(PlayerOne + "You will be playing as 'X' \nPlease enter player two's name: ");
+                    //string PlayerTwo = Console.ReadLine();
+                    //Console.WriteLine(PlayerTwo + "You will be playing as 'O'");
+                    //Human NumOne = new Human('X', PlayerOne);
+                    //Human NumTwo = new Human('O', PlayerTwo);
+
+                    //for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    //{
+                    //    NumOne.TakeATurn();
+                    //    if (Controller.CheckWin())
+                    //    {
+                    //        Console.WriteLine("Congratulations " + NumOne.Name + "! You Win!");
+                    //        break;
+                    //    }
+                    //    NumTwo.TakeATurn();
+                    //    if (Controller.CheckWin())
+                    //    {
+                    //        Console.WriteLine("Congratulations " + NumTwo.Name + "! You Win!");
+                    //        break;
+                    //    }
+                    //}
 
                 }
                 else if (MenuInput == 2)
