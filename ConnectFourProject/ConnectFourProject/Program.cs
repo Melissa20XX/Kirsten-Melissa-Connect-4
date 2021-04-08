@@ -219,9 +219,11 @@ namespace ConnectFour
 
             return false;
         }
-        public static bool PrintGameBoard(char piece, int turn) //static method so that the changes apply to all objects
+        public static void PrintGameBoard() //static method so that the changes apply to all objects
         {
             //7 collumns by 6 rows
+            Console.WriteLine();
+
             for (int i=0; i<7; i++)
             {
                 for(int j=0; j<7; j++)
@@ -230,13 +232,19 @@ namespace ConnectFour
                 }
                 Console.WriteLine();
             }
+        }
+        public static bool CheckTurn(char piece, int turn)
+        {
+            for (int i = 5; i >= 0; i--)
+            {
+                if (GameArray[i , turn - 1] == "| # |")
+                {
+                    GameArray[i , turn - 1] = "| " + piece + " |";
+                    return true;
+                }
+            }
 
-            //integer parameter input so we can place a game piece in the correct collumn
-            //we need to check if a collumn is full and if it is full return try again
-            //should we clear the console before printing the game board with turn changes? - Console.Clear()
-            //maybe here, but maybe not
-
-            return true; //return true if the game piece is able to be placed and false if the collumn is full
+            return false; //returning true if the game piece is able to be placed and false if the collumn is full
         }
     }
     public abstract class Player
@@ -265,14 +273,23 @@ namespace ConnectFour
             {
                 Console.WriteLine(Name + " please enter the number of the collumn you wish to place your game piece in: ");
                 int turn = Int32.Parse(Console.ReadLine());
-                if (Controller.PrintGameBoard(GamePiece, turn)) // pass the collumn number and the game piece to the print game board to check if it is full
+                if (turn <= 7 && turn >= 1) //checking for proper collumn number
                 {
-                    TurnCompleted = true; 
+                    if (Controller.CheckTurn(GamePiece, turn)) // pass the collumn number and the game piece to the print game board to check if it is full
+                    {
+                        TurnCompleted = true;
+                        Console.Clear();
+                        Controller.PrintGameBoard();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Collumn is full, please place your game piece somewhere else!");
+                        TurnCompleted = false; // if the collumn was full, the player's turn is not over and they should pick another collumn number
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Collumn is full, please place your game piece somewhere else!");
-                    TurnCompleted = false; // if the collumn was full, the player's turn is not over and they should pick another collumn number
+                    TurnCompleted = false;
                 }
 
             } while (TurnCompleted == false); 
@@ -303,35 +320,31 @@ namespace ConnectFour
 
                 if (MenuInput == 1)
                 {
+                    Console.WriteLine("Please enter player one's name: ");
+                    string PlayerOne = Console.ReadLine();
+                    Console.WriteLine(PlayerOne + " You will be playing as 'X' \n\nPlease enter player two's name: ");
+                    string PlayerTwo = Console.ReadLine();
+                    Console.WriteLine("\n" + PlayerTwo + " You will be playing as 'O'");
+                    Human NumOne = new Human('X', PlayerOne);
+                    Human NumTwo = new Human('O', PlayerTwo);
+                    
+                    Controller.PrintGameBoard();
 
-                    Controller.PrintGameBoard('X', 2);
-                    if(Controller.CheckWin())
+                    for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
                     {
-                        Console.WriteLine("win");
+                        NumOne.TakeATurn();
+                        if (Controller.CheckWin())
+                        {
+                            Console.WriteLine("Congratulations " + NumOne.Name + "! You Win!");
+                            break;
+                        }
+                        NumTwo.TakeATurn();
+                        if (Controller.CheckWin())
+                        {
+                            Console.WriteLine("Congratulations " + NumTwo.Name + "! You Win!");
+                            break;
+                        }
                     }
-                    //Console.WriteLine("Please enter player one's name: ");
-                    //string PlayerOne = Console.ReadLine();
-                    //Console.WriteLine(PlayerOne + "You will be playing as 'X' \nPlease enter player two's name: ");
-                    //string PlayerTwo = Console.ReadLine();
-                    //Console.WriteLine(PlayerTwo + "You will be playing as 'O'");
-                    //Human NumOne = new Human('X', PlayerOne);
-                    //Human NumTwo = new Human('O', PlayerTwo);
-
-                    //for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
-                    //{
-                    //    NumOne.TakeATurn();
-                    //    if (Controller.CheckWin())
-                    //    {
-                    //        Console.WriteLine("Congratulations " + NumOne.Name + "! You Win!");
-                    //        break;
-                    //    }
-                    //    NumTwo.TakeATurn();
-                    //    if (Controller.CheckWin())
-                    //    {
-                    //        Console.WriteLine("Congratulations " + NumTwo.Name + "! You Win!");
-                    //        break;
-                    //    }
-                    //}
 
                 }
                 else if (MenuInput == 2)
