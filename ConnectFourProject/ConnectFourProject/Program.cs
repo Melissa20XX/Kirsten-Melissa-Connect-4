@@ -173,14 +173,16 @@ namespace ConnectFour
             }
 
             //diagonal left to right checking
+
             counter = 0;
-            for (int i = 0; i< Length - 1; i++) //one less than max so when one is added to the index it wont break
+            for (int j = 0; j < 3; j++)
             {
-                for (int j = i; j< Width - 1; j++) //one less than max so when one is added to the index it wont break
+                int k = j;
+                for (int i = 0; i < 5 - j; i++)
                 {
-                    if (GameArray[i, j] != "| # |")
+                    if (GameArray[k, i] != "| # |")
                     {
-                        if (GameArray[i, j] == GameArray[i + 1, j + 1])
+                        if (GameArray[k, i] == GameArray[k + 1, i +1])
                         {
                             counter++;
                             if (counter == 3)
@@ -193,35 +195,96 @@ namespace ConnectFour
                             counter = 0;
                         }
                     }
+                    //printing index comparisons to checek if diagonal is working properly
+                    //Console.WriteLine(k + ", " + i + " Compared to " + (k + 1) + ", " + (i + 1));
+                    k++;
                 }
             }
 
-            //diagonal right to left checking                              still have to do this diagonal
-            //counter = 0;
-            //for (int i = 6; i > 0; i--)
-            //{
-            //    for (int j = 7; j > 0; j--)
-            //    {
-            //        if (GameArray[i, j] != "| # |")
-            //        {
-            //            if (GameArray[i, j] == GameArray[i - 1, j - 1])
-            //            {
-            //                counter++;
-            //                if (counter == 3)
-            //                {
-            //                    return true;
-            //                }
-            //            }
-            //            else
-            //            {
-            //                counter = 0;
-            //            }
-            //        }
-            //    }
-            //}
+            counter = 0;
+            for (int j = 1; j < 4; j++)
+            {
+                int k = j;
+                for (int i = 0; i < 5 - (j-1); i++)
+                {
+                    if (GameArray[i, k] != "| # |")
+                    {
+                        if (GameArray[i, k] == GameArray[i + 1, k + 1])
+                        {
+                            counter++;
+                            if (counter == 3)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            counter = 0;
+                        }
+                    }
+                    //printing index comparisons to check if diagonal is working properly
+                    //Console.WriteLine(i + ", " + k + " Compared to " + (i + 1) + ", " + (k + 1));
+                    k++;
+                }
+            }
 
 
 
+            //diagonal right to left checking 
+
+            counter = 0;
+            for (int j = 5; j > 2; j--)
+            {
+                int k = j;
+                for (int i = 0; i < j; i++)
+                {
+                    if (GameArray[k, i] != "| # |")
+                    {
+                        if (GameArray[k, i] == GameArray[k - 1, i + 1])
+                        {
+                            counter++;
+                            if (counter == 3)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            counter = 0;
+                        }
+                    }
+                    //printing index comparisons to check if diagonal is working properly
+                    //Console.WriteLine(k + ", " + i + " Compared to " + (k - 1) + ", " + (i + 1));
+                    k--;
+                }
+            }
+
+            counter = 0;
+            for (int j = 3; j > 0; j--)
+            {
+                int k = j;
+                for (int i = 5; i >= j; i--)
+                {
+                    if (GameArray[i, k] != "| # |")
+                    {
+                        if (GameArray[i, k] == GameArray[i - 1, k + 1])
+                        {
+                            counter++;
+                            if (counter == 3)
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            counter = 0;
+                        }
+                    }
+                    //printing index comparisons to check if diagonal is working properly
+                    //Console.WriteLine(i + ", " + k + " Compared to " + (i - 1) + ", " + (k + 1));
+                    k++;
+                }
+            }
 
             return false;
         }
@@ -354,7 +417,6 @@ namespace ConnectFour
 
             do
             {
-
                 Console.WriteLine("Input 1 or 2 to Play: \n1: Player VS. Player \n2: Player VS. Computer");
                 int MenuInput = Int32.Parse(Console.ReadLine());
 
@@ -367,7 +429,7 @@ namespace ConnectFour
                     Console.WriteLine("\n" + PlayerTwo + " You will be playing as 'O'");
                     Human NumOne = new Human('X', PlayerOne);
                     Human NumTwo = new Human('O', PlayerTwo);
-                    
+
                     Controller.PrintGameBoard();
 
                     for (int i = 1; i <= Controller.Length * Controller.Width; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
@@ -396,7 +458,7 @@ namespace ConnectFour
                     Console.WriteLine("Please enter your name: ");
                     string PlayerName = Console.ReadLine();
                     Console.WriteLine(PlayerName + "You will be playing as 'X'");
-                    Human Player = new Human('X' , PlayerName);
+                    Human Player = new Human('X', PlayerName);
                     Computer Comp = new Computer('O');
 
                     Controller.PrintGameBoard();
