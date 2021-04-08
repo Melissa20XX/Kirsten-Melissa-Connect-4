@@ -296,14 +296,35 @@ namespace ConnectFour
         }
 
 }
-    //public class Computer : Player
-    //{
-    //    public override bool TakeATurn()
-    //    {
-    //        //AI
-    //        return false;
-    //    }
-    //}
+    public class Computer : Player
+    {
+        public Computer(char piece) : base(piece)
+        {
+
+        }
+        public override void TakeATurn()
+        {
+            bool TurnCompleted;
+            do 
+            {
+                Random r = new Random();
+                int turn = r.Next(1, 7);
+
+                if (Controller.CheckTurn(GamePiece, turn)) // pass the collumn number and the game piece to the print game board to check if it is full
+                {
+                    TurnCompleted = true;
+                    Console.Clear();
+                    Controller.PrintGameBoard();
+                }
+                else
+                {
+                    Console.WriteLine("Collumn is full, please place your game piece somewhere else!");
+                    TurnCompleted = false; // if the collumn was full, the computer's turn is not over and needs to pick another collumn number
+                }
+
+            } while (TurnCompleted == false);
+        }
+    }
 
 
     class Program
@@ -344,16 +365,42 @@ namespace ConnectFour
                             Console.WriteLine("Congratulations " + NumTwo.Name + "! You Win!");
                             break;
                         }
+                        if (i == 42)
+                        {
+                            Console.WriteLine("This game is a tie!");
+                        }
                     }
 
                 }
                 else if (MenuInput == 2)
                 {
-                    //Console.WriteLine("Please enter your name: ");
-                    //string PlayerName = Console.ReadLine();
-                    //Console.WriteLine(PlayerName + "You will be playing as 'X'");
-                    //Human Player = new Human(PlayerName);
+                    Console.WriteLine("Please enter your name: ");
+                    string PlayerName = Console.ReadLine();
+                    Console.WriteLine(PlayerName + "You will be playing as 'X'");
+                    Human Player = new Human('X' , PlayerName);
+                    Computer Comp = new Computer('O');
 
+                    Controller.PrintGameBoard();
+
+                    for (int i = 1; i <= 42; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    {
+                        Player.TakeATurn();
+                        if (Controller.CheckWin())
+                        {
+                            Console.WriteLine("Congratulations " + Player.Name + "! You Win!");
+                            break;
+                        }
+                        Comp.TakeATurn();
+                        if (Controller.CheckWin())
+                        {
+                            Console.WriteLine("The Computer is the winner!");
+                            break;
+                        }
+                        if (i == 42)
+                        {
+                            Console.WriteLine("This game is a tie!");
+                        }
+                    }
                 }
                 else
                 {
