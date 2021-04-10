@@ -358,7 +358,6 @@ namespace ConnectFour
     {
         static void Main(string[] args)
         {
-            //Controller.CheckWin();
             string PlayAgain;
 
             do
@@ -378,7 +377,7 @@ namespace ConnectFour
 
                     Controller.PrintGameBoard();
 
-                    for (int i = 1; i <= (Controller.Length * Controller.Width)/2; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    for (int i = 1; i <= (Controller.Length * Controller.Width)/2; i++) // total number of spaces on the game board (divided by two)...if no one wins in 42 turns the game is a tie
                     {
                         NumOne.TakeATurn();
                         if (Controller.CheckWin())
@@ -409,7 +408,7 @@ namespace ConnectFour
 
                     Controller.PrintGameBoard();
 
-                    for (int i = 1; i <= (Controller.Length * Controller.Width) / 2; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    for (int i = 1; i <= (Controller.Length * Controller.Width) / 2; i++) // total number of spaces on the game board (divided by two)...if no one wins in 42 turns the game is a tie
                     {
                         Player.TakeATurn();
                         if (Controller.CheckWin())
