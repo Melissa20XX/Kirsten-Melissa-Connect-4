@@ -56,7 +56,6 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
-                                Console.WriteLine("Winner - Horizontal");
                                 return true;
                             }
                         }
@@ -80,8 +79,6 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
-                                Console.WriteLine("Winner - Vertical");
-
                                 return true;
                             }
                         }
@@ -108,8 +105,6 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
-                                Console.WriteLine("Winner - diagonal L-R 1");
-
                                 return true;
                             }
                         }
@@ -141,8 +136,6 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
-                                Console.WriteLine("Winner - diagonal L-R 2");
-
                                 return true;
                             }
                         }
@@ -178,8 +171,6 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
-                                Console.WriteLine("Winner - diagonal R-L 1");
-
                                 return true;
                             }
                         }
@@ -211,8 +202,6 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
-                                Console.WriteLine("Winner - diagonal R-L 1");
-
                                 return true;
                             }
                         }
