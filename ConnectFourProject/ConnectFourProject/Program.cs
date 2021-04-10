@@ -34,7 +34,8 @@ namespace ConnectFour
                                               { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
                                               { "| # |", "| # |", "| # |", "| # |", "| # |", "| # |", "| # |" },
                                               { "  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  " } };
-        
+
+
         public static bool CheckWin()
         {
             //static so it can be called within the other classes and without creating an object
@@ -55,6 +56,7 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
+                                Console.WriteLine("Winner - Horizontal");
                                 return true;
                             }
                         }
@@ -78,6 +80,8 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
+                                Console.WriteLine("Winner - Vertical");
+
                                 return true;
                             }
                         }
@@ -104,6 +108,8 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
+                                Console.WriteLine("Winner - diagonal L-R 1");
+
                                 return true;
                             }
                         }
@@ -111,6 +117,10 @@ namespace ConnectFour
                         {
                             counter = 0;
                         }
+                    }
+                    else
+                    {
+                        counter = 0;
                     }
                     //printing index comparisons to checek if diagonal is working properly
                     //Console.WriteLine(k + ", " + i + " Compared to " + (k + 1) + ", " + (i + 1));
@@ -131,6 +141,8 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
+                                Console.WriteLine("Winner - diagonal L-R 2");
+
                                 return true;
                             }
                         }
@@ -138,6 +150,10 @@ namespace ConnectFour
                         {
                             counter = 0;
                         }
+                    }
+                    else
+                    {
+                        counter = 0;
                     }
                     //printing index comparisons to check if diagonal is working properly
                     //Console.WriteLine(i + ", " + k + " Compared to " + (i + 1) + ", " + (k + 1));
@@ -162,6 +178,8 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
+                                Console.WriteLine("Winner - diagonal R-L 1");
+
                                 return true;
                             }
                         }
@@ -169,6 +187,10 @@ namespace ConnectFour
                         {
                             counter = 0;
                         }
+                    }
+                    else 
+                    {
+                        counter = 0;
                     }
                     //printing index comparisons to check if diagonal is working properly
                     //Console.WriteLine(k + ", " + i + " Compared to " + (k - 1) + ", " + (i + 1));
@@ -189,6 +211,8 @@ namespace ConnectFour
                             counter++;
                             if (counter == 3)
                             {
+                                Console.WriteLine("Winner - diagonal R-L 1");
+
                                 return true;
                             }
                         }
@@ -196,6 +220,10 @@ namespace ConnectFour
                         {
                             counter = 0;
                         }
+                    }
+                    else
+                    {
+                        counter = 0;
                     }
                     //printing index comparisons to check if diagonal is working properly
                     //Console.WriteLine(i + ", " + k + " Compared to " + (i - 1) + ", " + (k + 1));
@@ -330,6 +358,7 @@ namespace ConnectFour
     {
         static void Main(string[] args)
         {
+            //Controller.CheckWin();
             string PlayAgain;
 
             do
@@ -349,7 +378,7 @@ namespace ConnectFour
 
                     Controller.PrintGameBoard();
 
-                    for (int i = 1; i <= Controller.Length * Controller.Width; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    for (int i = 1; i <= (Controller.Length * Controller.Width)/2; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
                     {
                         NumOne.TakeATurn();
                         if (Controller.CheckWin())
@@ -363,7 +392,7 @@ namespace ConnectFour
                             Console.WriteLine("Congratulations " + NumTwo.Name + "! You Win!");
                             break;
                         }
-                        if (i == 42)
+                        if (i == (Controller.Length * Controller.Width) / 2)
                         {
                             Console.WriteLine("This game is a tie!");
                         }
@@ -380,7 +409,7 @@ namespace ConnectFour
 
                     Controller.PrintGameBoard();
 
-                    for (int i = 1; i <= Controller.Length * Controller.Width; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
+                    for (int i = 1; i <= (Controller.Length * Controller.Width) / 2; i++) // total number of spaces on the game board...if no one wims in 42 turns the game is a tie
                     {
                         Player.TakeATurn();
                         if (Controller.CheckWin())
@@ -394,7 +423,7 @@ namespace ConnectFour
                             Console.WriteLine("The Computer is the winner!");
                             break;
                         }
-                        if (i == 42)
+                        if (i == (Controller.Length * Controller.Width) / 2)
                         {
                             Console.WriteLine("This game is a tie!");
                         }
