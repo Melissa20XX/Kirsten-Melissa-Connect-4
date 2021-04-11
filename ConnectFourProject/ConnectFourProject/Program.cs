@@ -285,22 +285,31 @@ namespace ConnectFour
         public override void TakeATurn()
         {
             bool TurnCompleted;
-            do //let player take a turn untill the pick a collumn that is not full
+            do //let player take a turn until they pick a collumn that is not full
             {
                 Console.WriteLine(Name + " please enter the number of the collumn you wish to place your game piece in: ");
-                int turn = Int32.Parse(Console.ReadLine());
-                if (turn <= 7 && turn >= 1) //checking for proper collumn number
+                var input = Console.ReadLine();
+                if (input != "")
                 {
-                    if (Controller.CheckTurn(GamePiece, turn)) // pass the collumn number and the game piece to the print game board to check if it is full
+                    int turn = Int32.Parse(input);
+
+                    if (turn <= 7 && turn >= 1) //checking for proper collumn number
                     {
-                        TurnCompleted = true;
-                        Console.Clear();
-                        Controller.PrintGameBoard();
+                        if (Controller.CheckTurn(GamePiece, turn)) // pass the collumn number and the game piece to the print game board to check if it is full
+                        {
+                            TurnCompleted = true;
+                            Console.Clear();
+                            Controller.PrintGameBoard();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Collumn is full, please place your game piece somewhere else!");
+                            TurnCompleted = false; // if the collumn was full, the player's turn is not over and they should pick another collumn number
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Collumn is full, please place your game piece somewhere else!");
-                        TurnCompleted = false; // if the collumn was full, the player's turn is not over and they should pick another collumn number
+                        TurnCompleted = false;
                     }
                 }
                 else
@@ -334,7 +343,6 @@ namespace ConnectFour
                 }
                 else
                 {
-                    Console.WriteLine("Collumn is full, please place your game piece somewhere else!");
                     TurnCompleted = false; // if the collumn was full, the computer's turn is not over and needs to pick another collumn number
                 }
 
