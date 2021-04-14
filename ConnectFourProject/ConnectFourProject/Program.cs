@@ -260,7 +260,7 @@ namespace ConnectFour
                 }
             }
 
-            return false; //returning true if the game piece is able to be placed and false if the collumn is full
+            return false; //returning true if the game piece is able to be placed and false if the column is full
         }
     }
     public abstract class Player
