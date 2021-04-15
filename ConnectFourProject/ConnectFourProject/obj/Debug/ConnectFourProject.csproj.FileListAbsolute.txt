@@ -5,3 +5,10 @@ C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\Con
 C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.csproj.CoreCompileInputs.cache
 C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.exe
 C:\Users\kirst\Documents\GitHub\Kirsten-Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.pdb
+E:\Users\Melissa20XX\Desktop\School\Object Oriented Programming\Connect4Repo\Kirsten---Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.csprojAssemblyReference.cache
+E:\Users\Melissa20XX\Desktop\School\Object Oriented Programming\Connect4Repo\Kirsten---Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.csproj.CoreCompileInputs.cache
+E:\Users\Melissa20XX\Desktop\School\Object Oriented Programming\Connect4Repo\Kirsten---Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.exe
+E:\Users\Melissa20XX\Desktop\School\Object Oriented Programming\Connect4Repo\Kirsten---Melissa-Connect-4\ConnectFourProject\ConnectFourProject\obj\Debug\ConnectFourProject.pdb
+E:\Users\Melissa20XX\Desktop\School\Object Oriented Programming\Connect4Repo\Kirsten---Melissa-Connect-4\ConnectFourProject\ConnectFourProject\bin\Debug\ConnectFourProject.exe.config
+E:\Users\Melissa20XX\Desktop\School\Object Oriented Programming\Connect4Repo\Kirsten---Melissa-Connect-4\ConnectFourProject\ConnectFourProject\bin\Debug\ConnectFourProject.exe
+E:\Users\Melissa20XX\Desktop\School\Object Oriented Programming\Connect4Repo\Kirsten---Melissa-Connect-4\ConnectFourProject\ConnectFourProject\bin\Debug\ConnectFourProject.pdb

@@ -260,7 +260,7 @@ namespace ConnectFour
                 }
             }
 
-            return false; //returning true if the game piece is able to be placed and false if the collumn is full
+            return false; //returning true if the game piece is able to be placed and false if the column is full
         }
     }
     public abstract class Player
@@ -287,7 +287,7 @@ namespace ConnectFour
             bool TurnCompleted;
             do //let player take a turn until they pick a collumn that is not full
             {
-                Console.WriteLine(Name + " please enter the number of the collumn you wish to place your game piece in: ");
+                Console.WriteLine(Name + " please enter the number of the column you wish to place your game piece in: ");
                 var input = Console.ReadLine();
                 if (input != "")
                 {
@@ -350,6 +350,40 @@ namespace ConnectFour
         }
     }
 
+    /*
+    public class HardComputer : Player
+    {
+        public HardComputer(char piece) : base(piece)
+        {
+
+        }
+        public override void TakeATurn()
+        {
+
+            bool ValidColumn = false;
+            for (int i = 0; i < 7; i++)
+            {
+
+                if (Controller.CheckTurn(GamePiece, i)) // pass the collumn number and the game piece to the print game board to check if it is full
+                {
+                    ValidColumn = true;
+                    //if (Controller.CheckWin()){ return; }
+                    //Controller.PrintGameBoard();
+                }
+
+            }
+
+            //uhm ok so? 
+            //if the computer detects a valid column, it could drop a piece there, check for a win, and revert the change if it returns false
+            //after checking all 7 columns, it'll give up and use a random column
+
+
+        }
+    }
+    
+    */
+
+    //"Hard computer" above is not ready for implementation
 
     class Program
     {
